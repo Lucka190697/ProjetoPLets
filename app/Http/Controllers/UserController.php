@@ -17,8 +17,6 @@ class UserController extends Controller
         $title = 'User List';
         // $users = DB::table('users')->paginate(15);
         $users = User::paginate($this->paginate);
-        //  dd($users->links());
-        // return view('users.index', ['users' => $model->paginate($this->paginate)], compact('title'));
         return view('users.index', compact('users', 'title'));
     }
 

@@ -12,7 +12,6 @@ class BookRepository
     public function createProfile($data)
     {
         if(isset($data['thumbnail'])){
-            // dd($data);
         request()->thumbnail->move(public_path('book/'),
                 $data['title'] . '.' .
                 $data['thumbnail']->getClientOriginalExtension());

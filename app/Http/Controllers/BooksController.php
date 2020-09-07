@@ -68,7 +68,7 @@ class BooksController extends Controller
     public function destroy(Book $model, $id)
     {
         $current = $model->find($id);
-        dd($current);
+        // dd($current);
         if(isset($current->thumbnail))
             unlink(public_path('book/') . $current->thumbnail);
 

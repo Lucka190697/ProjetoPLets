@@ -33,9 +33,6 @@ class UserRequest extends FormRequest
             'phone' => ['string', 'min:8', 'max:15'],
         ];
         // dd($rules);
-        //  'email' => [
-            // 'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-        // ],
     return $rules;
     }
 }

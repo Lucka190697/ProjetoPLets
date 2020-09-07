@@ -18,7 +18,7 @@
                         <div class="col-6 float-left">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <img src="{{ asset('/books/'. $book->thumbnail) }}"
+                                    <img src="{{ asset('/book/'. $book->thumbnail) }}"
                                     width="250" height="auto" class="img img-profile">
                                 </li>
                             <ul>
@@ -29,16 +29,16 @@
                                     <strong>ID: </strong>{{ $book->id }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Name: </strong>{{ $book->name }}
+                                    <strong>ISBN: </strong>{{ $book->isbn }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Email: </strong>{{ $book->email }}
+                                    <strong> Title: </strong>{{ $book->title }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Phone: </strong>{{ $book->phone }}
+                                    <strong> Author: </strong>{{ $book->author }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Created at: </strong>{{ $book->created_at = date('d/m/Y', strtotime($book->created_at)) }}
+                                    <strong> Entry Date: </strong>{{ $book->entryDate = date('d/m/Y', strtotime($book->entryDate)) }}
                                 </li>
                             </ul>
                         </div>
