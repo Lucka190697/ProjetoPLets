@@ -77,4 +77,19 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
+
+
+    protected function mapAuthenticatedWebRoutes()
+    {
+        Route::middleware('web', 'auth', 'verified')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapUnauthenticatedWebRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
 }

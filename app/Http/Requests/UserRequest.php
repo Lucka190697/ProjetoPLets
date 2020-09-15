@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\RouteUri;
 use PHPUnit\Framework\MockObject\Rule\MethodName;
 
 class UserRequest extends FormRequest
@@ -24,15 +26,19 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this->method());
      $rules =  [
-        'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255', $this->method() == 'PUT' ? 'min:1' : 'unique:users'],
-            'password' => ['required', 'string', 'min:3', 'max:255', 'confirmed'],
-            'thumbnail' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048', 'min:1'],
-            'phone' => ['string', 'min:8', 'max:15'],
+        'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users,email',
+            'password' => 'required|string|min:3|max:255|confirmed',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048|min:1',
+            'phone' => 'string|min:3|max:15',
+            'isadmin' => 'required|boolean',
         ];
-        // dd($rules);
+
+        if($this->method() == 'PUT'){
+            $rules['email'] .= ",{$this->user->id}";
+        }
+
     return $rules;
     }
 }

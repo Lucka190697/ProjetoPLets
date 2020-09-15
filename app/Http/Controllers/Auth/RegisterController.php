@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Enums\UserRolesEnum;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -52,9 +53,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:3', 'confirmed'],//min:8
             'thumbnail' => ['string', 'min:1', 'max:255'],
-            'phone' => ['string', 'min:11', 'max:15']
+            'phone' => ['string', 'min:3', 'max:15'],//min:11
+            'isadmin' => ['required'],
         ]);
     }
 
@@ -66,12 +68,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = ([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'thumbnail' => $data['thumbnail'],
+            'thumbnail' => 'user-default.jpg',
             'phone' => $data['phone'],
+            // 'isadmin' => $data['isadmin'],
         ]);
+        if($data['isadmin'] == 'employee')
+            $user['isadmin'] = true;
+        if($data['isadmin'] == 'user')
+            $user['isadmin'] = false;
+
+        User::create($user);
+
+        // if (!$user->hasRole(\App\Enums\UserRolesEnum::CLERK)){
+        //     $user->assignRole(\App\Enums\UserRolesEnum::CLERK);
+            return $user;
+        // }
+        // else
+        //     return redirect()->back();
     }
 }

@@ -21,8 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('thumbnail')->nullable();
             $table->string('phone');
+            $table->boolean('isadmin');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,7 +11,8 @@
                     </div>
                     <div class="col-md-3 float-right">
                         <a href="{{ URL::previous() }}" class="btn btn-block btn-primary">
-                            <i class="fas fa-fw fa-arrow-left mr-2"></i>Back
+                            <i class="fas fa-fw fa-arrow-left mr-2"></i>
+                            @lang('buttons.Back')
                         </a>
                     </div>
                 </div>
@@ -27,7 +28,8 @@
                             @include('books.partials.forms.create-form')
                             <div class="col-md-6 col-sm-12 float-right" >
                                 <button type="submit" class="btn btn-block btn-success">
-                                    <i class="fas fa-fw fa-check"></i> Ok
+                                    <i class="fas fa-fw fa-check"></i>
+                                    @lang('buttons.Send')
                                 </button>
                             </div>
                         </form>

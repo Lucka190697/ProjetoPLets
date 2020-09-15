@@ -36,6 +36,13 @@ class BookRepository
     public function dateTreatment($data)
     {
         $data['entryDate'] = date('Y-m-d H:i:s', strtotime($data['entryDate']));//2020-08-03 21:30:00
+//        dd($data['entryDate']);
+        return $data;
+    }
+
+    public function user_id($data)
+    {
+        $data['user_id'] = auth()->user()->id;
         return $data;
     }
 

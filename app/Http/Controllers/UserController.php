@@ -2,78 +2,120 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRolesEnum;
 use App\Repositories\UserRepository;
 use App\Http\Requests\UserRequest;
 use App\User;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
+use Spatie\Permission\Contracts\Role;
+
+// use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-
-    private $paginate = 200;
+    private $paginate = 10;
 
     public function index(User $model)
     {
         $title = 'User List';
-        // $users = DB::table('users')->paginate(15);
-        $users = User::paginate($this->paginate);
-        return view('users.index', compact('users', 'title'));
+        if(auth()->user()->isadmin == true) {
+            // $users = DB::table('users')->paginate(15);
+            $users = User::paginate($this->paginate);
+            return view('users.index', compact('users', 'title'));
+        }else
+            return redirect()->back();
     }
 
     public function create()
     {
         $title = 'Create new user';
-        return view('users.create', compact('title'));
+        if (auth()->user()->isadmin == true)
+            return view('users.create', compact('title'));
+        else
+            return redirect()->back();
     }
 
-    public function store(User $model, UserRequest $request, UserRepository $repository)
+    public function store(UserRequest $request, UserRepository $repository)
     {
-        $data = $request->validated();
-        $data = $repository->createProfile($data);
-        $user = $repository->createHash($data);
-        $model->create($user);
+        if (auth()->user()->isadmin == true) {
+            $data = $request->validated();
+            $data = $repository->createProfile($data);
+            $user = $repository->createHash($data);
+            // $model->create($user);
+            User::create($data);
 
-        return redirect()->route('user.index');
+            $request->session()->flash('message', 'User created!');
+            return redirect()->route('user.index');
+        } else
+            return redirect()->back();
     }
 
     public function edit(User $model, $id)
     {
-        $title = 'Edit this user';
-        $user = $model->find($id);
+        if (auth()->user()->isadmin == true) {
+            $title = 'Edit this user';
+            $user = $model->find($id);
+            $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'title'));
+            return view('users.edit', compact('user', 'title'));
+        } else
+            return redirect()->back();
     }
 
     public function update(User $model, UserRepository $repository, UserRequest $request, $id)
     {
-        $data = $request->validated();
-        $current = $model->find($id);
-        $data = $repository->editProfile($current, $data);
-        $user = $repository->createHash($data);
+        if (auth()->user()->isadmin == true) {
+            $data = $request->validated();
+            $current = $model->find($id);
+            $data = $repository->editProfile($current, $data);
+            $user = $repository->createHash($data);
 
-        $current->update($user);
+            $current->update($user);
 
-        $request->session()->flash('alert-success', 'Usuário cadastrado eh isso!!', 'alert-danger', 'Oops! não foi possível cadastrar!');
+            $request->session()->flash('message', 'User updated!');
 
-        return redirect()->route('user.index');
+            return redirect()->route('user.index');
+        } else
+            return redirect()->back();
     }
 
     public function show(User $model, $id)
     {
-        $title = 'User details';
-        $user = $model->find($id);
+        if (auth()->user()->isadmin == true) {
+            $title = 'User details';
+            $user = $model->find($id);
 
-        return view('users.show', compact('title', 'user'));
+            return view('users.show', compact('title', 'user'));
+        } else
+            return redirect()->back();
     }
 
-    public function destroy(User $model, $id)
+    public function destroy(User $model, Request $request, $id)
+        // public function delete(User $model, $id)
     {
-        $current = $model->find($id);
-        if(isset($current->thumbnail))
-            unlink(public_path('users/') . $current->thumbnail);
+        if ((auth()->user()->isadmin == true) && ($id != auth()->user()->id)) {
+            $current = $model->find($id);
+            if (isset($current->thumbnail))
+                unlink(public_path('users/') . $current->thumbnail);
+            User::destroy($id);
 
-        User::destroy($id);
+            $request->session()->flash('message', 'User deleted!');
 
-        return redirect()->route('user.index');
+            return redirect()->route('user.index');
+        } else
+            return redirect()->back();
+    }
+
+    public function search(User $model, Request $request)
+    {
+        if(auth()->user()->isadmin == true) {
+            $title = 'Search';
+            $data = $request->all();
+            $users = $model->search($data);
+
+            return view('users.index', compact('title', 'users'));
+        }else
+            return redirect()->back();
     }
 }

@@ -18,30 +18,34 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/css/sb-admin-2.css" rel="stylesheet">
-    <link href="https://startbootstrap.github.io/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.0.7/css/sb-admin-2.css"
+          rel="stylesheet">
+    <link href="https://startbootstrap.github.io/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css"
+          rel="stylesheet">
     {{-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css" rel="stylesheet"> --}}
 
 </head>
 <body>
-    <div id="app">
-            @include('layouts.partials.topbar')
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-    <!--<script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            $('#user-dataTable').DataTable();
-            });
-    </script>
+<div id="app">
+    @include('layouts.partials.topbar')
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function() {
+        $('#user-dataTable').DataTable();
+        });
+</script>
 -->
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> --}}
 <script src="{{ asset('js/jquery-3.5.1.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('js/jquey.min.js') }}" type="text/javascipt"></script> --}}
 <script src="{{ asset('js/jquery-mask.js') }}" type="text/javascript"></script>
-{{-- <script src="{{ asset('js/jquery.mask.min.js') }}"  type="text/javascript"></script> --}}
-<script src="{{ asset('js/masks.js') }}"  type="text/javascript"></script>
+<script src="{{ asset('js/jquery.mask.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/masks.js') }}" type="text/javascript"></script>
 </body>
 </html>

@@ -20,6 +20,8 @@ class BookTableSeeder extends Seeder
                 'giver' => 'Barry Allen',
                 'entryDate' => '2020-08-03 21:30:00',
                 'thumbnail' => 'default.jpg',
+
+                'user_id' => 1,
             ],
             [
                 'isbn' => 2345678912345,
@@ -28,6 +30,8 @@ class BookTableSeeder extends Seeder
                 'giver' => 'Sue Dibny',
                 'entryDate' => '2020-08-03 21:30:00',
                 'thumbnail' => 'default.jpg',
+
+                'user_id' =>1,
             ],
         ]);
     }

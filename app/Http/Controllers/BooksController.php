@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
+use App\Models\Loan;
 use App\Repositories\BookRepository;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Support\Facades\Storage;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    private $paginate;
+    private $paginate = 15;
 
     public function index(Book $book)
     {
@@ -23,16 +24,23 @@ class BooksController extends Controller
 
     public function create()
     {
+        $books = Book::all();
         $title = 'Insert new book';
-        return view('books.create', compact('title'));
+        return view('books.create', compact('title', 'books'));
     }
 
     public function store(Book $model, BookRequest $request, BookRepository $repository)
     {
-        $data = $request->all();
-        $data = $repository->createProfile($data);
-        $book = $repository->dateTreatment($data);
-        $model->create($book);
+        $data = $request->validated();
+        $createProfile = $repository->createProfile($data);
+        $user_id = $repository->user_id($createProfile);
+        $dateTreatment = $repository->dateTreatment($user_id);
+
+        Book::create($user_id);
+
+//        $model->create($user_id);
+
+        $request->session()->flash('message', 'Book created!');
 
         return redirect()->route('books.index');
     }
@@ -52,7 +60,7 @@ class BooksController extends Controller
         $book = $repository->dateTreatment($data);
         $current->update($book);
 
-        $request->session()->flash('alert-success', 'Livro cadastrado eh isso!!', 'alert-danger', 'Oops! não foi possível cadastrar!');
+        $request->session()->flash('message', 'Book uptaded!');
 
         return redirect()->route('books.index');
     }
@@ -65,15 +73,25 @@ class BooksController extends Controller
         return view('books.show', compact('title', 'book'));
     }
 
-    public function destroy(Book $model, $id)
+    public function destroy(Book $model, BookRequest $request, $id)
     {
         $current = $model->find($id);
-        // dd($current);
-        if(isset($current->thumbnail))
+        if (isset($current->thumbnail))
             unlink(public_path('book/') . $current->thumbnail);
 
         Book::destroy($id);
 
+        $request->session()->flash('message', 'book deleted!');
+
         return redirect()->route('books.index');
+    }
+
+    public function search(Book $model, Request $request)
+    {
+        $title = 'Search';
+        $data = $request->all();
+        $books = $model->search($data);
+
+        return view('books.index', compact('title', 'books'));
     }
 }

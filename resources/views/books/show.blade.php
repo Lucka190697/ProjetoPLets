@@ -32,13 +32,13 @@
                                     <strong>ISBN: </strong>{{ $book->isbn }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Title: </strong>{{ $book->title }}
+                                    <strong> @lang('labels.Title') </strong>{{ $book->title }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Author: </strong>{{ $book->author }}
+                                    <strong> @lang('labels.Author') </strong>{{ $book->author }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong> Entry Date: </strong>{{ $book->entryDate = date('d/m/Y', strtotime($book->entryDate)) }}
+                                    <strong> @lang('labels.Entry Date') </strong>{{ $book->entryDate = date('d/m/Y', strtotime($book->entryDate)) }}
                                 </li>
                             </ul>
                         </div>
@@ -47,11 +47,11 @@
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <a href="{{ URL::previous() }}" class="btn btn-block btn-primary">
-                            <i class="fas fa-fw fa-arrow-left"></i> Back</a>
+                            <i class="fas fa-fw fa-arrow-left"></i> @lang('buttons.Back')</a>
                     </div>
                     <div class="col-md-6 float-right">
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-block btn-success">
-                            <i class="fas fa-fw fa-pen"></i> Edit</a>
+                            <i class="fas fa-fw fa-pen"></i> @lang('buttons.Edit')</a>
                     </div>
                 </div>
             </div>

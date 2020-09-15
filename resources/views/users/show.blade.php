@@ -47,11 +47,15 @@
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <a href="{{ URL::previous() }}" class="btn btn-block btn-primary">
-                            <i class="fas fa-fw fa-arrow-left"></i> Back</a>
+                            <i class="fas fa-fw fa-arrow-left"></i>
+                            @lang('buttons.Back')
+                        </a>
                     </div>
                     <div class="col-md-6 float-right">
                         <a href="{{ route('user.edit', $user->id) }}" class="btn btn-block btn-success">
-                            <i class="fas fa-fw fa-pen"></i> Edit</a>
+                            <i class="fas fa-fw fa-pen"></i>
+                            @lang('buttons.Send')
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 <div class="col-md-6 float-left">
     <div class="form-group">
-        <label class="label" for="name">Name:</label>
+        <label class="label" for="name">
+            @lang('labels.Name')
+        </label>
         <input
             id="name"
             type="text"
@@ -15,7 +17,9 @@
     </div>
 
     <div class="form-group">
-        <label class="label" for="email">Email:</label>
+        <label class="label" for="email">
+            @lang('labels.Email')
+        </label>
         <input
             id="email"
             type="text"
@@ -29,7 +33,9 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="password">Password:</label>
+        <label class="label" for="password">
+            @lang('labels.Password:')
+        </label>
         <input
             id="password"
             type="password"
@@ -45,7 +51,9 @@
 </div>
     <div class="col-md-6 float-right">
         <div class="form-group">
-        <label class="label" for="password">Password confirmation:</label>
+        <label class="label" for="password">
+            @lang('labels.Password confirmation')
+        </label>
         <input
             id="password_confirmation"
             type="password"
@@ -59,13 +67,15 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="phone">Phone:</label>
+        <label class="label" for="phone">
+            @lang('labels.Phone')
+        </label>
         <input
-            id="input-phone"
+        id="mask-phone"
             type="text"
-            class="form-control @error('phone') is-invalid @enderror"
-            name="phone" value="{{ old('phone') }}" autocomplete="phone"
-            required autofocus>
+            class="form-control mask-phone"
+            name="phone" value="{{ old('phone') }}"
+            required>
             @error('phone')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -73,7 +83,9 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="thumbnail">Thumbnail:</label>
+        <label class="label" for="thumbnail">
+            @lang('labels.Thumbnail')
+        </label>
         <input
             id="thumbnail"
             type="file"

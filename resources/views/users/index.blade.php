@@ -12,20 +12,26 @@
                     </div>
                     <div class="col-md-3 float-right">
                         <a href="{{ route('user.create') }}" class="btn btn-block btn-primary">
-                              <i class="fas fa-fw fa-plus mr-2"></i>Add User
+                              <i class="fas fa-fw fa-plus mr-2"></i>
+                            @lang('buttons.Add User')
                         </a>
                     </div>
                     {{-- </div> --}}
                 </div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('message'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('message')}}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="fechar">&times;</a>
                         </div>
                     @endif
-
-
+                    <div class="col-md-8 mt-2 float-left">
+                        <h5>Keep your users record updated</h5>
+                    </div>
+                    <div class="col-md-4 float-right mb-3">
+                        @include('layouts.partials.paginations.search')
+                    </div>
                     <div class="table table-responsive">
                         <table class="table table-responsive table-default">
                                 @include('users.partials.table.head')
@@ -34,11 +40,7 @@
                                 @endforeach
                         </table>
                     </div>
-                    <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end">
-                            {{$users->links()}}
-                        </nav>
-                    </div>
+                    @include('layouts.partials.paginations.footer')
                 </div>
             </div>
         </div>

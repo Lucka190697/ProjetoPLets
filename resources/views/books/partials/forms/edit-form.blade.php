@@ -1,5 +1,4 @@
 <div class="col-md-6 float-left">
-
     <div class="form-group">
         <label class="label" for="isbn">ISBN:</label>
         <input
@@ -16,7 +15,7 @@
     </div>
 
     <div class="form-group">
-        <label class="label" for="title">Title:</label>
+        <label class="label" for="title">@lang('labels.Title')</label>
         <input
             id="title"
             type="text"
@@ -30,7 +29,7 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="author">Author:</label>
+        <label class="label" for="author">@lang('labels.Author')</label>
         <input
             id="author"
             type="text"
@@ -46,7 +45,7 @@
 </div>
     <div class="col-md-6 float-right">
         <div class="form-group">
-        <label class="label" for="giver">Guiver By:</label>
+        <label class="label" for="giver">@lang('labels.Giver By')</label>
         <input
             id="giver"
             type="text"
@@ -60,7 +59,7 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="entryDate">Entry Date:</label>
+        <label class="label" for="entryDate">@lang('labels.Entry Date')</label>
         <input
             id="input-phone" type="text" name="entryDate"
             class="form-control @error('entryDate') is-invalid @enderror"
@@ -73,7 +72,7 @@
             @enderror
     </div>
     <div class="form-group">
-        <label class="label" for="thumbnail">Thumbnail:</label>
+        <label class="label" for="thumbnail">@lang('labels.Thumbnail')</label>
         <input
             id="thumbnail"
             type="file"
