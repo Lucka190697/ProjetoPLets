@@ -1,11 +1,19 @@
 <div class="form-group">
     <label class="label" for="book_id">@lang('labels.Book')</label>
     <select class="form-control" name="book_id" id="book_id" required>
-        @foreach($books as $book)
-            <option value="{{ $book->id }}">
-                {{$book->title}} - ({{$book->author}}) {{$book->loan}}
+        @if($title == 'New loan record')
+            @foreach($books as $book)
+{{--                @if($books->loan)--}}
+                <option value="{{ $book->id }}">
+                    {{$book->title}} - ({{$book->author}})
+                </option>
+{{--                @endif--}}
+            @endforeach
+        @elseif($title == 'Reservation')
+            <option value="{{ $books->id }}">
+                {{$books->title}} - ({{$books->author}})
             </option>
-        @endforeach
+        @endif
     </select>
     @error('book_id')
     <span class="invalid-feedback" role="alert">

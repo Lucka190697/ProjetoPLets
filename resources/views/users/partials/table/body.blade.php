@@ -11,10 +11,10 @@
     <td>{{ $user->email }}</td>
     <td>{{ $user->phone }}</td>
     <td>{{ date('d/m/Y', strtotime($user->created_at)) }} </td>
-    <td class="badge badge-info">
+    <td>
         {{ $user->isadmin == true ? 'Admin' : 'User' }}
     </td>
-    <td>
+    <td class="btn-group">
         @include('users.partials.table.buttons')
     </td>
 </tr>

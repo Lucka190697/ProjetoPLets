@@ -27,9 +27,17 @@ class LoanController extends Controller
         $title = 'New loan record';
         $books = Book::whereHas('loan', function ($query) {
             $query->whereNull('loans_date');
+            $query->where('is_loan');
         })->get();
 //        $books = Book::all();
 //        dd($books);
+        return view('loans.create', compact('title', 'books'));
+    }
+
+    public function reservation($id)
+    {
+        $title = 'Reservation';
+        $books = Book::find($id);
         return view('loans.create', compact('title', 'books'));
     }
 

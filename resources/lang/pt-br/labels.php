@@ -22,16 +22,9 @@ return [
     'Register' => 'Registrar-se',
     'Confirm Password' => 'Confirmação da Senha',
 
-    'User Managment' => 'Gerenciamento de Usuários',
-    'Loan Managment' => 'Gerenciamento de Usuários',
-    'Book Managment' => 'Gerenciamento de Livro',
+    'Users Managment' => 'Gerenciamento de Usuários',
+    'Loan Management' => 'Gerenciamento de Usuários',
+    'Books Managment' => 'Gerenciamento de Livro',
     'Logout' => 'Sair',
-
-
-
-
-
-
-
 
 ];

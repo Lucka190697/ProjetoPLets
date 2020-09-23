@@ -1,12 +1,5 @@
 <tr>
-    <td>{{ $loan->id }}</td>
-    <td>
-        <a href="{{route('books.show', $loan->id)}}">
-            <img src="{{ asset('book/' . $loan->thumbnail) }}" width="70" height="auto" class="img">
-        </a>
-    </td>
-    <td>{{ $loan->title }}</td>
-    <td>{{ $loan->author }}</td>
+    <td>{{$loan->book_id}}</td>
     <td>{{ date('d/m/Y', strtotime($loan->loans_date)) }}</td>
     <td>{{ date('d/m/Y', strtotime($loan->return_date)) }}</td>
     <td>

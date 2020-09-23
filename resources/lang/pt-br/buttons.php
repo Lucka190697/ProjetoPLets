@@ -9,6 +9,5 @@ return [
     'Add Book' => 'Novo Livro',
     'Add User' => 'Novo Usuário',
     'New Loan' => 'Novo Emprpestimo',
-
-
+    'Reservation' => 'Reservar',
 ];

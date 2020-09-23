@@ -57,4 +57,5 @@ Route::group(['prefix' => 'book_loans'], function () {
     Route::get('/show/{id}', 'LoanController@show')->name('loans.show')->middleware('auth');
     Route::get('/destroy/{id}', 'LoanController@destroy')->name('loans.destroy')->middleware('auth');
     Route::get('/search', 'LoanController@search')->name('loans.search')->middleware('auth');
+    Route::get('/reservation/{id}', 'LoanController@reservation')->name('loans.reservation')->middleware('auth');
 });
